@@ -60,8 +60,17 @@ export const Button = styled('button', {
     fontWeight: 'bold',
     transition: 'background, 0.3s',
 
-    '&:hover': {
+    '&:disabled': {
+        opacity: 0.6,
+        cursor: 'not-allowed',
+    },
+
+    '&:not(:disabled):hover': {
         background: '$green300',
     }
+})
+
+export const Loading = styled('button', {
+    
 })
 

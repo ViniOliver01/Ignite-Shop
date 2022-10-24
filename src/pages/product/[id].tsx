@@ -1,8 +1,10 @@
 import Image from "next/future/image"
-import Stripe from "stripe";
-import { stripe } from '../../lib/stripe';
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head'
+
+import Stripe from "stripe";
+import { stripe } from '../../lib/stripe';
 import axios from "axios";
 
 import { 
@@ -52,27 +54,33 @@ export default function Product({ product }: ProductProps){
   }
   
   return (
-    <ProductContainer>
-      <ImageBoxGradient>
-        <Image src={product.imageUrl} width={520} height={480} alt=""/>
-      </ImageBoxGradient>
+    <>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
       
-      <ProductDetails>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
-        <p>{product.description}</p>
+      <ProductContainer>
+        <ImageBoxGradient>
+          <Image src={product.imageUrl} width={520} height={480} alt=""/>
+        </ImageBoxGradient>
+        
+        <ProductDetails>
+          <h1>{product.name}</h1>
+          <span>{product.price}</span>
+          <p>{product.description}</p>
 
-        <Button 
-        disabled={isCreatingCheckout} 
-        onClick={handleBuy} 
-        type="button"
-        >
-          {isCreatingCheckout? 'Loading...' : 'Comprar agora'}
-          
-        </Button>
-      </ProductDetails>
-      
-    </ProductContainer>
+          <Button 
+          disabled={isCreatingCheckout} 
+          onClick={handleBuy} 
+          type="button"
+          >
+            {isCreatingCheckout? 'Loading...' : 'Comprar agora'}
+            
+          </Button>
+        </ProductDetails>
+        
+      </ProductContainer>
+    </>
   )
 }
 

@@ -36,8 +36,6 @@ export default function CartModal(){
         })
     })
 
-    console.log(productList)
-    
     async function handleRedirectToCheckout(){
         try {
             const response = await axios.post('/api/checkout', {

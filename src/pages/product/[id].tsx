@@ -71,7 +71,7 @@ export default function Product({ product }: ProductProps){
             <p>{product.description}</p>
           </ProductDetailsDescription>
           
-          <form action="">
+          {/* <form action="">
             <RadioArea defaultValue="default">
 
               <RadioButtom value="P" id="r1" disabled={true}>
@@ -96,7 +96,7 @@ export default function Product({ product }: ProductProps){
 
 
             </RadioArea>
-          </form>
+          </form> */}
           
 
           

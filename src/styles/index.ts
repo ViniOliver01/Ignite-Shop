@@ -14,7 +14,8 @@ export const {
         colors: {
             white: '#fff',
             gray900: '#121214',
-            gray800: '#202024',
+            gray800: '#28282c',
+            gray700: '#2e2e33',
             gray500: '#8D8D99',
             gray300: '#c4c4cc',
             gray100: '#e1e1e6',

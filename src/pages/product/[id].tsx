@@ -5,17 +5,20 @@ import Head from 'next/head'
 
 import Stripe from "stripe";
 import { stripe } from '../../lib/stripe';
-import axios from "axios";
 
 import { 
         Button, 
         ImageBoxGradient, 
         Loading, 
         ProductContainer, 
-        ProductDetails 
+        ProductDetails, 
+        ProductDetailsDescription, 
+        RadioArea, 
+        RadioButtom,
+        RadioIndicator,
       } from '../../styles/pages/product'
-import { useState } from "react";
 import { useShoppingCart } from "use-shopping-cart";
+import * as RadioGroup from '@radix-ui/react-radio-group';
 
 interface ProductProps {
   product:{
@@ -31,7 +34,6 @@ interface ProductProps {
 export default function Product({ product }: ProductProps){
   const { addItem } = useShoppingCart()
   const { isFallback } = useRouter()
-  const [isCreatingCheckout, setIsCreatingCheckout] = useState(false)
 
   async function handleAddToCart(){
     addItem({
@@ -44,7 +46,6 @@ export default function Product({ product }: ProductProps){
       price_data: {defaultPriceId: product.defaultPriceId}
     })
   }
-
   if (isFallback) {
     return <Loading />
   }
@@ -61,19 +62,51 @@ export default function Product({ product }: ProductProps){
         </ImageBoxGradient>
         
         <ProductDetails>
-          <h1>{product.name}</h1>
-          <span>{new Intl.NumberFormat('pt-BR', {
-                            style: 'currency', 
-                            currency: 'BRL' 
-                            }).format((product.price)/100)}</span>
-          <p>{product.description}</p>
+          <ProductDetailsDescription>
+            <h1>{product.name}</h1>
+            <span>{new Intl.NumberFormat('pt-BR', {
+                              style: 'currency', 
+                              currency: 'BRL' 
+                              }).format((product.price)/100)}</span>
+            <p>{product.description}</p>
+          </ProductDetailsDescription>
+          
+          <form action="">
+            <RadioArea defaultValue="default">
+
+              <RadioButtom value="P" id="r1" disabled={true}>
+                <RadioIndicator />
+                <p>P</p>
+              </RadioButtom>
+
+              <RadioButtom value="M" id="r2">
+                <RadioIndicator />
+                <p color="unchecked">M</p>
+              </RadioButtom>
+
+              <RadioButtom value="G" id="r3">
+                <RadioIndicator />
+                <p color="unchecked">G</p>
+              </RadioButtom>
+
+              <RadioButtom value="GG" id="r4">
+                <RadioIndicator />
+                <p>GG</p>
+              </RadioButtom>
+
+
+            </RadioArea>
+          </form>
+          
+
+          
+          
 
           <Button 
-          disabled={isCreatingCheckout} 
           onClick={handleAddToCart} 
           type="button"
           >
-            {isCreatingCheckout? 'Loading...' : 'Adicionar ao carrinho'}
+            {'Adicionar ao carrinho'}
             
           </Button>
         </ProductDetails>

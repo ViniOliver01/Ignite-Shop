@@ -1,4 +1,5 @@
 import { styled } from "..";
+import * as RadioGroup from '@radix-ui/react-radio-group';
 
 export const ProductContainer = styled('main', {
     display: 'grid',
@@ -26,7 +27,9 @@ export const ImageBoxGradient = styled('div', {
 export const ProductDetails = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    
+})
+
+export const ProductDetailsDescription = styled('div', {
     h1: {
         marginBottom: '1rem',
         color: '$gray300',
@@ -74,3 +77,51 @@ export const Loading = styled('button', {
     
 })
 
+export const RadioArea = styled(RadioGroup.Root, {
+    marginTop: 32,
+    display: 'flex',
+    gap: 30,
+})
+
+export const RadioButtom = styled(RadioGroup.Item, {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "$gray700",
+    width: 60,
+    height: 60,
+    borderRadius: "50%",
+    
+    '&:disabled': {
+        opacity: 0.3,
+    },
+    
+    p:{
+        fontSize: '$lg',
+        position: "absolute", 
+        color: '$white',
+    },
+
+})
+
+export const RadioIndicator = styled(RadioGroup.Indicator, {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    position: "relative",
+
+    color: '$gray800',
+    fontSize: '$sm',
+    
+    "&::after": {
+        content: '""',
+        display: "block",
+        width: "100%",
+        height: "100%",
+        borderRadius: "50%",
+        backgroundColor: "$gray500",
+        opacity: 1,
+    }
+})

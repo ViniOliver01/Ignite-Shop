@@ -3,7 +3,7 @@ import { styled } from "..";
 export const HomeContainer = styled('main', {
     display: 'flex',
     width: '100%',
-    maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
+    maxWidth: 'calc(100vw - ((100vw - 1400px) / 2))',
     marginLeft: 'auto',
     minHeight: 656,
 })
@@ -14,8 +14,7 @@ export const Product = styled('div', {
     cursor: 'pointer',
     position: 'relative',
     overflow: 'hidden',
-    minWidth: 540,
-    
+    minWidth: 600,
 
     display: 'flex',
     alignItems: 'center',
@@ -63,4 +62,22 @@ export const Product = styled('div', {
             opacity: 1,
         },
     },
+})
+
+export const IconBox = styled('div', {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    background: '$green300',
+    color: '$white',
+    width: 56,
+    height: 56,
+    borderRadius: 6,
+
+})
+
+export const HomeProductDetails = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
 })

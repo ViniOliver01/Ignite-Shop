@@ -7,7 +7,8 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 import 'keen-slider/keen-slider.min.css'
-import { HomeContainer, Product } from './../styles/pages/home'
+import { HomeContainer, HomeProductDetails, IconBox, Product } from './../styles/pages/home'
+import { Handbag } from "phosphor-react";
 
 interface HomeProps {
   products:{
@@ -48,18 +49,23 @@ export default function Home({ products }: HomeProps){
               <Product className="keen-slider__slide">
                 <Image src={product.imageUrl} width={520} height={480} alt=""/>
                 <footer>
-                    <strong>{product.name}</strong>
-                    <span>{new Intl.NumberFormat('pt-BR', {
-                            style: 'currency', 
-                            currency: 'BRL' 
-                            }).format((product.price)/100)}</span>
+                    <HomeProductDetails>
+                      <strong>{product.name}</strong>
+                      <span>{new Intl.NumberFormat('pt-BR', {
+                              style: 'currency', 
+                              currency: 'BRL' 
+                              }).format((product.price)/100)}</span>
+                    </HomeProductDetails>
+                    <IconBox>
+                      <Handbag size={32} weight={'bold'}/>
+                    </IconBox>
                 </footer>
+                
               </Product>
             </Link>
           )
         })
       }
-
       </HomeContainer>
     </>
   );

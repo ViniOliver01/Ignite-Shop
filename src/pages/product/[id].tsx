@@ -15,38 +15,34 @@ import {
         ProductDetails 
       } from '../../styles/pages/product'
 import { useState } from "react";
+import { useShoppingCart } from "use-shopping-cart";
 
 interface ProductProps {
   product:{
     id: string
     name: string
     imageUrl: string
-    price: string
+    price: number
     description: string
     defaultPriceId: string
   }
 }
 
-
 export default function Product({ product }: ProductProps){
+  const { addItem } = useShoppingCart()
   const { isFallback } = useRouter()
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false)
 
-  async function handleBuy(){
-    console.log(product.defaultPriceId);
-    setIsCreatingCheckout(true)
-    try {
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
-
-      const { checkoutUrl } = response.data
-
-      window.location.href = checkoutUrl
-    } catch (error) {
-      alert('Falha ao redirecionar')
-      setIsCreatingCheckout(false)
-    }
+  async function handleAddToCart(){
+    addItem({
+      name: product.name,
+      description: product.description,
+      id: product.id,
+      price: product.price,
+      currency: 'BRL',
+      image: product.imageUrl,
+      price_data: {defaultPriceId: product.defaultPriceId}
+    })
   }
 
   if (isFallback) {
@@ -66,15 +62,18 @@ export default function Product({ product }: ProductProps){
         
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{new Intl.NumberFormat('pt-BR', {
+                            style: 'currency', 
+                            currency: 'BRL' 
+                            }).format((product.price)/100)}</span>
           <p>{product.description}</p>
 
           <Button 
           disabled={isCreatingCheckout} 
-          onClick={handleBuy} 
+          onClick={handleAddToCart} 
           type="button"
           >
-            {isCreatingCheckout? 'Loading...' : 'Comprar agora'}
+            {isCreatingCheckout? 'Loading...' : 'Adicionar ao carrinho'}
             
           </Button>
         </ProductDetails>
@@ -108,10 +107,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
-        price: new Intl.NumberFormat('pt-BR', {
-          style: 'currency', 
-          currency: 'BRL' 
-          }).format(price.unit_amount/100),
+        price: price.unit_amount,
         description: product.description,
         defaultPriceId: price.id,
       }

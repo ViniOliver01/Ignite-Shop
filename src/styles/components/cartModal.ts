@@ -63,10 +63,6 @@ export const ItemDetails = styled('div', {
     span:{
         fontWeight: 'bold',
     },
-    '.quantity':{
-        fontSize: 14,
-        color: '$gray500',
-    },
     a:{
         fontSize: '$sm',
         textDecorationLine: 'none',
@@ -78,6 +74,37 @@ export const ItemDetails = styled('div', {
         color: '$green300',
     }
 
+})
+
+export const QuantityButtonsArea = styled('div', {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    width: '100%',
+    padding: '0.5rem 0',
+
+    p:{
+        fontSize: '$sm',
+        fontWeight: 'bold',
+        color: '$gray100',
+        border: '2px solid $gray100',
+        padding: '0 1.0rem',
+        borderRadius: 6,
+    },
+    span:{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'end',
+        alignItems: 'center',
+    }
+})  
+
+export const ButtonCartQuantity = styled('button', {
+    height: 24,
+    background: 'transparent',
+    border: 'none',
+    color: '$gray100',
+    cursor: 'pointer',
 })
 
 export const ImageBoxGradient = styled('div', {

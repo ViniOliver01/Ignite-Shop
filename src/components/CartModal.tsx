@@ -8,8 +8,10 @@ import {
     Close, 
     Details, 
     Button,
+    ButtonCartQuantity,
+    QuantityButtonsArea,
 } from "../styles/components/cartModal";
-import { X } from 'phosphor-react';
+import { X, Plus, Minus } from 'phosphor-react';
 
 
 import * as Dialog from '@radix-ui/react-dialog';
@@ -25,6 +27,8 @@ export default function CartModal(){
             cartDetails, 
             removeItem, 
             clearCart,
+            incrementItem,
+            decrementItem,
         } = useShoppingCart()
         
     const cartDetailsKeys = (Object.keys(cartDetails));
@@ -74,8 +78,21 @@ export default function CartModal(){
                             </ImageBoxGradient>
                             <ItemDetails>
                                 <p>{cartDetails[key].name}</p>
-                                <p className="quantity">Quantidade: {cartDetails[key].quantity}</p>
-                                <span>{cartDetails[key].formattedValue}</span>
+                                <QuantityButtonsArea>
+                                    <ButtonCartQuantity
+                                        onClick={() => {
+                                            decrementItem(cartDetails[key].id)
+                                        }}
+                                    > <Minus size={24} weight={'bold'} /> </ButtonCartQuantity>
+                                    <p>{cartDetails[key].quantity}</p>
+                                    <ButtonCartQuantity 
+                                        onClick={() => {
+                                            incrementItem(cartDetails[key].id)
+                                          }}
+                                    > <Plus size={24} weight={'bold'} /> </ButtonCartQuantity>
+
+                                    <span>{cartDetails[key].formattedValue}</span>
+                                </QuantityButtonsArea>
                                 <a onClick={() => removeItem(cartDetails[key].id)}>Remover</a>
                             </ItemDetails>
                         </CartItem>

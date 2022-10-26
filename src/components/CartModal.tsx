@@ -24,6 +24,7 @@ export default function CartModal(){
             cartCount, 
             cartDetails, 
             removeItem, 
+            clearCart,
         } = useShoppingCart()
         
     const cartDetailsKeys = (Object.keys(cartDetails));
@@ -43,6 +44,7 @@ export default function CartModal(){
             })
             const { checkoutUrl } = response.data
             window.location.href = checkoutUrl
+            clearCart()
         } catch (error) {
             alert('Falha ao redirecionar')
             console.log(error)

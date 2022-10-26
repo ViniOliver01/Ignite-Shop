@@ -20,6 +20,7 @@ import {
 import { useShoppingCart } from "use-shopping-cart";
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useEffect, useState } from "react";
+import { CheckCircle } from "phosphor-react";
 
 interface ProductProps {
   product:{
@@ -36,6 +37,7 @@ export default function Product({ product }: ProductProps){
   const { addItem, cartCount } = useShoppingCart()
   const { isFallback } = useRouter()
   const [itemAdd, setItemAdd] = useState(false)
+
   useEffect(()=>{
     setItemAdd(true)
     setTimeout(() => {
@@ -118,7 +120,8 @@ export default function Product({ product }: ProductProps){
           type="button"
           disabled={itemAdd}
           >
-            {itemAdd ? 'Produto adicionado' : 'Adicionar ao carrinho'}
+            <div className={itemAdd ? "progressBar progressBarLoading" : "progressBar"} />
+            {itemAdd ? <p>Adicionado <CheckCircle size={32} /></p> : <p>Adicionar ao carrinho</p>}
             
           </Button>
         </ProductDetails>

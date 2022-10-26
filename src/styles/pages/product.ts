@@ -48,10 +48,13 @@ export const ProductDetailsDescription = styled('div', {
 })
 
 export const Button = styled('button', {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: 'center',
+
     width: '100%',
     height: 70,
     marginTop: 'auto',
-    padding: '1.25rem',
 
     background: '$green500',
     color: '$white',
@@ -63,15 +66,12 @@ export const Button = styled('button', {
     fontWeight: 'bold',
     transition: 'background, 0.3s',
 
-    '&:disabled': {
-        opacity: 0.8,
-        background: '$green300',
-        cursor: 'wait',
+    p:{
+        display: "flex",
+        alignItems: "center",
+        height: "100%",
+        transition: '2s'
     },
-
-    '&:not(:disabled):hover': {
-        background: '$green300',
-    }
 })
 
 export const Loading = styled('button', {

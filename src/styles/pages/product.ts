@@ -64,8 +64,9 @@ export const Button = styled('button', {
     transition: 'background, 0.3s',
 
     '&:disabled': {
-        opacity: 0.6,
-        cursor: 'not-allowed',
+        opacity: 0.8,
+        background: '$green300',
+        cursor: 'wait',
     },
 
     '&:not(:disabled):hover': {

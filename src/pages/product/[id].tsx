@@ -19,6 +19,7 @@ import {
       } from '../../styles/pages/product'
 import { useShoppingCart } from "use-shopping-cart";
 import * as RadioGroup from '@radix-ui/react-radio-group';
+import { useEffect, useState } from "react";
 
 interface ProductProps {
   product:{
@@ -32,8 +33,16 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps){
-  const { addItem } = useShoppingCart()
+  const { addItem, cartCount } = useShoppingCart()
   const { isFallback } = useRouter()
+  const [itemAdd, setItemAdd] = useState(false)
+  useEffect(()=>{
+    setItemAdd(true)
+    setTimeout(() => {
+      setItemAdd(false)
+    }, 1500)
+    
+  }, [cartCount])
 
   async function handleAddToCart(){
     addItem({
@@ -49,6 +58,8 @@ export default function Product({ product }: ProductProps){
   if (isFallback) {
     return <Loading />
   }
+
+  
   
   return (
     <>
@@ -105,8 +116,9 @@ export default function Product({ product }: ProductProps){
           <Button 
           onClick={handleAddToCart} 
           type="button"
+          disabled={itemAdd}
           >
-            {'Adicionar ao carrinho'}
+            {itemAdd ? 'Produto adicionado' : 'Adicionar ao carrinho'}
             
           </Button>
         </ProductDetails>

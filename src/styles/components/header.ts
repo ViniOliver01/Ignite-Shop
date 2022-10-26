@@ -1,4 +1,11 @@
-import { styled } from "..";
+import { keyframes, styled } from "..";
+
+const scaleUp = keyframes({
+    '0%': { transform: 'scale(1)' },
+    '25%': { transform: 'scale(1.5)' },
+    '75%': { transform: 'scale(1.5)' },
+    '100%': { transform: 'scale(1)' },
+})
 
 export const HeaderContainer = styled('header', {
     display: 'flex',
@@ -7,6 +14,11 @@ export const HeaderContainer = styled('header', {
     width: '100%',
     maxWidth: 1180,
     margin: '0 auto',
+
+    '.shake': {
+        animation: `${scaleUp} 1300ms`,
+        animationFillMode: 'both',
+    }
 })
 
 export const BagIcon = styled('div', {

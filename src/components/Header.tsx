@@ -8,9 +8,19 @@ import CartModal from "./CartModal";
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { BagCounter, BagIcon, HeaderContainer } from "../styles/components/header";
+import { useEffect, useState } from "react";
 
 export function Header(){
   const { cartCount } = useShoppingCart()
+  const [itemAdd, setItemAdd] = useState(false)
+
+  useEffect(()=>{
+    setItemAdd(true)
+    setTimeout(() => {
+      setItemAdd(false)
+    }, 2000)
+    
+  }, [cartCount])
 
   return (
     <HeaderContainer>
@@ -19,7 +29,7 @@ export function Header(){
           </Link>
           <Dialog.Root>
             <Dialog.Trigger asChild>
-              <BagIcon>
+              <BagIcon className={itemAdd == true ? "shake" : ""}>
                 <BagCounter>{cartCount}</BagCounter>
                 <Handbag size={24} weight={'bold'}/>
                 </BagIcon>

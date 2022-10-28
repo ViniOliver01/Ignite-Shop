@@ -78,6 +78,13 @@ export const Loading = styled('button', {
     
 })
 
+export const FormArea = styled('form', {
+    display: "flex",
+    flexDirection: 'column',
+    justifyContent: "center",
+    height: '100%',
+})
+
 export const RadioArea = styled(RadioGroup.Root, {
     marginTop: 32,
     display: 'flex',
@@ -92,9 +99,11 @@ export const RadioButtom = styled(RadioGroup.Item, {
     width: 60,
     height: 60,
     borderRadius: "50%",
+    cursor: 'pointer',
     
     '&:disabled': {
         opacity: 0.3,
+        cursor: 'not-allowed',
     },
     
     p:{
@@ -122,7 +131,7 @@ export const RadioIndicator = styled(RadioGroup.Indicator, {
         width: "100%",
         height: "100%",
         borderRadius: "50%",
-        backgroundColor: "$gray500",
+        backgroundColor: "$green500",
         opacity: 1,
     }
 })

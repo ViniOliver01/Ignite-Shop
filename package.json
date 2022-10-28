@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-radio-group": "^1.1.0",
     "@stitches/react": "^1.2.8",
@@ -18,8 +19,10 @@
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.38.0",
     "stripe": "^10.14.0",
-    "use-shopping-cart": "^3.1.2"
+    "use-shopping-cart": "^3.1.2",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.2",

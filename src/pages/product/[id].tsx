@@ -2,12 +2,16 @@ import Image from "next/future/image"
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head'
+import { useForm, Controller } from 'react-hook-form';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import Stripe from "stripe";
 import { stripe } from '../../lib/stripe';
 
 import { 
         Button, 
+        FormArea, 
         ImageBoxGradient, 
         Loading, 
         ProductContainer, 
@@ -33,10 +37,29 @@ interface ProductProps {
   }
 }
 
+const productSizeFormSchema = z.object({
+  type: z.enum(['P','M','G','GG']),
+})
+
+type ProductSizeFormInputs = z.infer<typeof productSizeFormSchema>;
+
+
+
 export default function Product({ product }: ProductProps){
   const { addItem, cartCount } = useShoppingCart()
   const { isFallback } = useRouter()
   const [itemAdd, setItemAdd] = useState(false)
+
+  const {
+    control,
+    register, 
+    handleSubmit, 
+    formState: {isSubmitting},
+    reset,
+  } = useForm<ProductSizeFormInputs>({
+    resolver: zodResolver(productSizeFormSchema),
+
+  })
 
   function itemAddedToCart(){
     setItemAdd(true)
@@ -54,6 +77,13 @@ export default function Product({ product }: ProductProps){
       price_data: {defaultPriceId: product.defaultPriceId}
     })
     itemAddedToCart()
+  }
+
+  async function handleSelectProductSize(data: ProductSizeFormInputs){
+    const {type} = data;
+    console.log('aaa')
+    console.log(type)
+    handleAddToCart()
   }
 
 
@@ -84,48 +114,51 @@ export default function Product({ product }: ProductProps){
             <p>{product.description}</p>
           </ProductDetailsDescription>
           
-          {/* <form action="">
-            <RadioArea defaultValue="default">
+          <FormArea onSubmit={handleSubmit(handleSelectProductSize)}>
+            <Controller
+              control={control}
+              name="type"
+              render={({field})=> {
+                return (
+                  <RadioArea defaultValue=""
+                    onValueChange={field.onChange} 
+                    value={field.value}
+                    >
 
-              <RadioButtom value="P" id="r1" disabled={true}>
-                <RadioIndicator />
-                <p>P</p>
-              </RadioButtom>
+                    <RadioButtom value="P" id="r1" disabled={true}>
+                      <RadioIndicator />
+                      <p>P</p>
+                    </RadioButtom>
 
-              <RadioButtom value="M" id="r2">
-                <RadioIndicator />
-                <p color="unchecked">M</p>
-              </RadioButtom>
+                    <RadioButtom value="M" id="r2">
+                      <RadioIndicator />
+                      <p color="unchecked">M</p>
+                    </RadioButtom>
 
-              <RadioButtom value="G" id="r3">
-                <RadioIndicator />
-                <p color="unchecked">G</p>
-              </RadioButtom>
+                    <RadioButtom value="G" id="r3">
+                      <RadioIndicator />
+                      <p color="unchecked">G</p>
+                    </RadioButtom>
 
-              <RadioButtom value="GG" id="r4">
-                <RadioIndicator />
-                <p>GG</p>
-              </RadioButtom>
+                    <RadioButtom value="GG" id="r4">
+                      <RadioIndicator />
+                      <p>GG</p>
+                    </RadioButtom>
 
-
-            </RadioArea>
-          </form> */}
-          
-
-          
-          
-
-          <Button 
-          onClick={handleAddToCart} 
-          type="button"
-          disabled={itemAdd}
-          >
-            <div className={itemAdd ? "progressBar progressBarLoading" : "progressBar"} />
-            {itemAdd ? <p>Adicionado <CheckCircle size={32} /></p> : <p>Adicionar ao carrinho</p>}
-            
-          </Button>
+                  </RadioArea>
+                )
+              }}
+            />
+            <Button 
+            type="submit"
+            disabled={itemAdd}
+            >
+              <div className={itemAdd ? "progressBar progressBarLoading" : "progressBar"} />
+              {itemAdd ? <p>Adicionado <CheckCircle size={32} /></p> : <p>Adicionar ao carrinho</p>}
+              
+            </Button>
+          </FormArea>
         </ProductDetails>
-        
       </ProductContainer>
     </>
   )

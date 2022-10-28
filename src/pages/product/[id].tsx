@@ -38,13 +38,10 @@ export default function Product({ product }: ProductProps){
   const { isFallback } = useRouter()
   const [itemAdd, setItemAdd] = useState(false)
 
-  useEffect(()=>{
+  function itemAddedToCart(){
     setItemAdd(true)
-    setTimeout(() => {
-      setItemAdd(false)
-    }, 1500)
-    
-  }, [cartCount])
+    setTimeout(() => {setItemAdd(false)}, 1500)
+  }
 
   async function handleAddToCart(){
     addItem({
@@ -56,8 +53,11 @@ export default function Product({ product }: ProductProps){
       image: product.imageUrl,
       price_data: {defaultPriceId: product.defaultPriceId}
     })
+    itemAddedToCart()
   }
-  if (isFallback) {
+
+
+  if (isFallback) { // Loading Skeleton
     return <Loading />
   }
 

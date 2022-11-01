@@ -1,5 +1,5 @@
 
-# Ignite Shop
+# 🚀Ignite Shop
 
 Esté é um projeto de e-commerce o qual tem por fim por em pratica a utilização dos conceitos de
 **SSR** *(Server Side Rendering)* e **SSG** *(Static Site Generator)*, utilizando como API de pagamentos o 

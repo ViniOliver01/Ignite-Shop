@@ -1,5 +1,5 @@
 
-# 🚀Ignite Shop
+# 🚀 Ignite Shop
 
 Esté é um projeto de e-commerce o qual tem por fim por em pratica a utilização dos conceitos de
 **SSR** *(Server Side Rendering)* e **SSG** *(Static Site Generator)*, utilizando como API de pagamentos o 
@@ -10,7 +10,7 @@ ao invés de se utilizar o **Context** padrão do React.
 Na parte da estilização foi utilizado o [stitches](https://stitches.dev/) ao invés do que vem sendo usado, o
 [Styled Components](https://styled-components.com/)
 
-## 📒Aprendizados
+## 📒 Aprendizados
 
 - Utilização do Next.JS
 - Aplicações de SSG e SSR

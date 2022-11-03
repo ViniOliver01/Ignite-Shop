@@ -1,9 +1,9 @@
 
 # 🚀 Ignite Shop
 
-Esté é um projeto de e-commerce o qual tem por fim por em pratica a utilização dos conceitos de
+Este é um projeto de e-commerce o qual tem por fim colocar em pratica a utilização dos conceitos de
 **SSR** *(Server Side Rendering)* e **SSG** *(Static Site Generator)*, utilizando como API de pagamentos o 
-[STRIPE](https://stripe.com/br) onde além de fazer o pagamento é responsavel por trazer as informações dos produtos
+[STRIPE](https://stripe.com/br) onde além de fazer o pagamento é responsável por trazer as informações dos produtos
 e preços.  
 Para fazer o controle dos itens de carrinho foi utilizado a biblioteca [USE-SHOPPING-CART](https://useshoppingcart.com/)
 ao invés de se utilizar o **Context** padrão do React.  

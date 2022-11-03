@@ -1,5 +1,4 @@
 import { SuccessContainer, SuccessImgBox, SuccessProductList } from "../styles/pages/success";
-import shirtImg from '../assets/shirt/Variant6.png'
 import Image from "next/future/image";
 import Link from 'next/link'
 import { GetServerSideProps } from "next";
@@ -28,7 +27,6 @@ export default function success({customerName, productList, productCount}: Succe
 
       <SuccessContainer>
         <h1>Compra efetuada!</h1>
-
 
         <SuccessProductList>
            {productList.map(item => {
@@ -76,7 +74,6 @@ export const getServerSideProps: GetServerSideProps =async ({ query }) => {
       name: product.name,
       imgUrl: product.images[0]
     })
-
     index++
   }
 

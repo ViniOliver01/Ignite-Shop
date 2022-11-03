@@ -5,6 +5,8 @@ import Head from 'next/head'
 import { useForm, Controller } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useShoppingCart } from "use-shopping-cart";
+import { useState } from "react";
 
 import Stripe from "stripe";
 import { stripe } from '../../lib/stripe';
@@ -21,9 +23,6 @@ import {
         RadioButtom,
         RadioIndicator,
       } from '../../styles/pages/product'
-import { useShoppingCart } from "use-shopping-cart";
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import { useEffect, useState } from "react";
 import { CheckCircle } from "phosphor-react";
 
 interface ProductProps {
@@ -43,23 +42,17 @@ const productSizeFormSchema = z.object({
 
 type ProductSizeFormInputs = z.infer<typeof productSizeFormSchema>;
 
-
-
 export default function Product({ product }: ProductProps){
-  const { addItem, cartCount } = useShoppingCart()
+  const { addItem } = useShoppingCart()
   const { isFallback } = useRouter()
   const [itemAdd, setItemAdd] = useState(false)
 
   const {
     control,
-    register, 
     handleSubmit, 
-    formState: {isSubmitting},
-    reset,
   } = useForm<ProductSizeFormInputs>({
-    resolver: zodResolver(productSizeFormSchema),
-
-  })
+        resolver: zodResolver(productSizeFormSchema),
+      })
 
   function itemAddedToCart(){
     setItemAdd(true)
@@ -86,12 +79,9 @@ export default function Product({ product }: ProductProps){
     handleAddToCart()
   }
 
-
   if (isFallback) { // Loading Skeleton
     return <Loading />
   }
-
-  
   
   return (
     <>
